@@ -1,1 +1,1 @@
-print("Welcome to Employee Wage Program")
+print("Welcome to employee wage computation program")
