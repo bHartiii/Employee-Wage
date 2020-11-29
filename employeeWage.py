@@ -41,12 +41,12 @@ class Employee:
 
     def monthlyWageComputation(self):
         workingHours = emp.getTotalWorkHours()
-        count=0
+        count=1
         monthlyWage=0
-        while count<len(workingHours):
-            dailyWage = workingHours[count] * WAGE_PER_HOUR
+        for dailyWorkingHour in workingHours:
+            dailyWage = dailyWorkingHour * WAGE_PER_HOUR
             monthlyWage = monthlyWage+dailyWage
-            dailyWageList.append(dailyWage)
+            dailyWageList["day-"+str(count)]=dailyWage
             count = count+1
         return monthlyWage
 
@@ -57,9 +57,9 @@ if __name__ == "__main__":
     PART_TIME_HOUR = 4
     MAX_HOURS = 100
     MAX_DAYS = 20
-    dailyWageList = []
+    dailyWageList = {}
     dailyWorkingHours = 0
     emp = Employee()
-    print(emp.monthlyWageComputation())
+    print("Total Monthly wage - "+str(emp.monthlyWageComputation()))
     print(dailyWageList)
 
