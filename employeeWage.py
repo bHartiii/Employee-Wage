@@ -31,17 +31,23 @@ class Employee:
     def getTotalWorkHours(self):
         workingDays = 0
         totalWorkingHours = 0
-        while totalWorkingHours < MAX_HOURS or workingDays < MAX_DAYS:
+        dailyWorkHoursList = []
+        while totalWorkingHours < MAX_HOURS and workingDays < MAX_DAYS:
             dailyWorkingHours = emp.getEmployeeDailyWorkingHours()
+            dailyWorkHoursList.append(dailyWorkingHours)
             workingDays = workingDays + 1
             totalWorkingHours = totalWorkingHours + dailyWorkingHours
-        print(totalWorkingHours)
-
-        return totalWorkingHours
+        return dailyWorkHoursList
 
     def monthlyWageComputation(self):
-        totalWorkingHours = emp.getTotalWorkHours()
-        monthlyWage = totalWorkingHours * WAGE_PER_HOUR
+        workingHours = emp.getTotalWorkHours()
+        count=0
+        monthlyWage=0
+        while count<len(workingHours):
+            dailyWage = workingHours[count] * WAGE_PER_HOUR
+            monthlyWage = monthlyWage+dailyWage
+            dailyWageList.append(dailyWage)
+            count = count+1
         return monthlyWage
 
 
@@ -51,8 +57,9 @@ if __name__ == "__main__":
     PART_TIME_HOUR = 4
     MAX_HOURS = 100
     MAX_DAYS = 20
-
+    dailyWageList = []
     dailyWorkingHours = 0
     emp = Employee()
     print(emp.monthlyWageComputation())
+    print(dailyWageList)
 
