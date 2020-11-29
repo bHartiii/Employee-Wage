@@ -1,4 +1,6 @@
 import random
+
+
 class Employee:
 
     def checkAttendance(self):
@@ -17,29 +19,29 @@ class Employee:
         }
         return switcher.get(is_part_time)
 
-    def calculateEmployeeDailyWage(self):
-        """
-        checks attendance and daily hours
-        calculates daily wage
-        :return dailyWage:
-        """
-        attendance = emp.checkAttendance()
-        emp.dailyWorkingHours = emp.checkPartTime()
-        dailyWage = 0
-        if attendance == "present":
-            dailyWage = WAGE_PER_HOUR * emp.dailyWorkingHours
+    def getEmployeeDailyWorkingHours(self):
 
-        return dailyWage
+        attendance = emp.checkAttendance()
+        if attendance == "present":
+            dailyWorkingHours = emp.checkPartTime()
+        else:
+            dailyWorkingHours=0
+        return dailyWorkingHours
+
+    def getTotalWorkHours(self):
+        workingDays = 0
+        totalWorkingHours = 0
+        while totalWorkingHours < MAX_HOURS or workingDays < MAX_DAYS:
+            dailyWorkingHours = emp.getEmployeeDailyWorkingHours()
+            workingDays = workingDays + 1
+            totalWorkingHours = totalWorkingHours + dailyWorkingHours
+        print(totalWorkingHours)
+
+        return totalWorkingHours
 
     def monthlyWageComputation(self):
-        monthlyWage = 0
-        workingDays = 0
-        workingHours = 0
-        while workingHours < 100 or workingDays < 20:
-            tempWage = emp.calculateEmployeeDailyWage()
-            monthlyWage = monthlyWage + tempWage
-            workingDays = workingDays + 1
-            workingHours = workingHours + emp.dailyWorkingHours
+        totalWorkingHours = emp.getTotalWorkHours()
+        monthlyWage = totalWorkingHours * WAGE_PER_HOUR
         return monthlyWage
 
 
@@ -49,6 +51,8 @@ if __name__ == "__main__":
     PART_TIME_HOUR = 4
     MAX_HOURS = 100
     MAX_DAYS = 20
+
     dailyWorkingHours = 0
     emp = Employee()
     print(emp.monthlyWageComputation())
+
